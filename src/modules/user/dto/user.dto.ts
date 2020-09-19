@@ -1,11 +1,9 @@
-import { IsOptional } from 'class-validator';
 export class UserDTO {
-    @IsOptional()
-    id?: string;
+    readonly id?: string;
 
-    @IsOptional()
-    name: string;
+    readonly name: string;
 
-    @IsOptional()
-    email: string;
+    readonly email: string;
+
+    readonly password: string;
 }
