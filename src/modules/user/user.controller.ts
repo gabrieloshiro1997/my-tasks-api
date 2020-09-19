@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseUUIDPipe, Post, ValidationPipe } from '@nestjs/common';
 import { CreateUserDTO } from './dto/create-user.dto';
 import { UserDTO } from './dto/user.dto';
 import { UserService } from './user.service';
@@ -13,9 +13,12 @@ export class UserController {
     }
 
     @Post()
-    async create(
-        @Body(ValidationPipe) createUserDTO: CreateUserDTO,
-    ): Promise<UserDTO> {
+    async create(@Body(ValidationPipe) createUserDTO: CreateUserDTO): Promise<UserDTO> {
         return this.userService.create(createUserDTO);
+    }
+
+    @Get(':id')
+    async findById(@Param('id', ParseUUIDPipe) id: string): Promise<UserDTO> {
+        return await this.userService.findById(id);
     }
 }
