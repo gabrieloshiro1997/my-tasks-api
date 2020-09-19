@@ -1,20 +1,24 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Task } from "./task.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Task } from './task.entity';
 
-@Entity()
+@Entity('user')
 export class User {
-	@PrimaryGeneratedColumn()
-	id: number;
+    @PrimaryGeneratedColumn('uuid')
+    id: string;
 
-	@Column()
-	name: string;
+    @Column()
+    name: string;
 
-	@Column()
-	email: string;
+    @Column()
+    email: string;
 
-	@Column()
-	password: string;
+    @Column()
+    password: string;
 
-	@OneToMany(type => Task, task => task.user)
-	tasks: Task[];
+    @OneToMany(
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        type => Task,
+        task => task.user,
+    )
+    tasks: Task[];
 }

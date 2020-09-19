@@ -1,20 +1,19 @@
 {
-	"type": "postgres",
-	"host": "localhost",
-	"port": 5432,
-	"username": "postgres",
-	"password": "docker",
-	"database": "my_tasks",
-	"synchronize": false,
-	"logging": false,
-	"entities": [
-		"dist/**/*.entity.js"
-	],
-	"migrations": [
-		"src/migration/**/*.js"
-	],
-	"cli": {
-		"entitiesDir": "src/entity",
-		"migrationsDir": "src/migration"
-	}
+    "type": "postgres",
+    "host": "localhost",
+    "port": 5432,
+    "username": "postgres",
+    "password": "docker",
+    "database": "my_tasks",
+    "synchronize": false,
+    "logging": false,
+    "entities": ["dist/**/*.entity.js"],
+    "migrations": ["src/migration/**/*.ts"],
+    "cli": {
+        "entitiesDir": "src/entity",
+        "migrationsDir": "src/migration"
+    },
+    "retryAttempts": 3,
+    "retryDelay": 3000,
+    "keepConnectionAlive": true
 }
