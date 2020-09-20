@@ -4,6 +4,7 @@ import { Task } from 'src/entity/task.entity';
 import { Repository } from 'typeorm';
 import { UserService } from '../user/user.service';
 import { CreateTaskDTO } from './dto/create-task.dto';
+import { UpdateTaskDTO } from './dto/update-task.dto';
 
 @Injectable()
 export class TaskService {
@@ -28,6 +29,20 @@ export class TaskService {
         newTask.user = user;
 
         return await this.taskRepository.save(newTask);
+    }
+
+    async update(id: string, updateTaskDTO: UpdateTaskDTO): Promise<Task> {
+        const task = await this.findById(id);
+
+        this.taskRepository.merge(task, updateTaskDTO);
+
+        return this.taskRepository.save(task);
+    }
+
+    async delete(id: string): Promise<void> {
+        await this.findById(id);
+
+        await this.taskRepository.delete(id);
     }
 
     async findById(id: string): Promise<Task> {
