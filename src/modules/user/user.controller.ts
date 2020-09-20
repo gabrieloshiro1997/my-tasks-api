@@ -1,6 +1,7 @@
 import {
     Body,
     Controller,
+    Delete,
     Get,
     Param,
     ParseUUIDPipe,
@@ -33,6 +34,11 @@ export class UserController {
         @Body(ValidationPipe) updateUserDTO: UpdateUserDTO,
     ): Promise<UserDTO> {
         return await this.userService.update(id, updateUserDTO);
+    }
+
+    @Delete(':id')
+    async delete(@Param('id', ParseUUIDPipe) id: string): Promise<void> {
+        await this.userService.delete(id);
     }
 
     @Get(':id')

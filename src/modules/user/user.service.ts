@@ -50,6 +50,12 @@ export class UserService {
         return this.userRepository.save(user);
     }
 
+    async delete(id: string): Promise<void> {
+        await this.findById(id);
+
+        await this.userRepository.delete(id);
+    }
+
     async findById(id: string): Promise<UserDTO> {
         const user = await this.userRepository.findOne(id);
 
