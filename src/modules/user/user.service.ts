@@ -4,7 +4,6 @@ import { User } from 'src/entity/user.entity';
 import { Repository } from 'typeorm';
 import { CreateUserDTO } from './dto/create-user.dto';
 import { UpdateUserDTO } from './dto/update-user.dto';
-import { UserDTO } from './dto/user.dto';
 
 @Injectable()
 export class UserService {
@@ -13,11 +12,11 @@ export class UserService {
         private userRepository: Repository<User>,
     ) {}
 
-    async findAll(): Promise<UserDTO[]> {
+    async findAll(): Promise<User[]> {
         return await this.userRepository.find();
     }
 
-    async create(createUserDTO: CreateUserDTO): Promise<UserDTO> {
+    async create(createUserDTO: CreateUserDTO): Promise<User> {
         const { email } = createUserDTO;
 
         const emailExists = await (await this.userRepository.find({ email })).length;
@@ -29,7 +28,7 @@ export class UserService {
         return await this.userRepository.save(createUserDTO);
     }
 
-    async update(id: string, updateUserDTO: UpdateUserDTO): Promise<UserDTO> {
+    async update(id: string, updateUserDTO: UpdateUserDTO): Promise<User> {
         const { email } = updateUserDTO;
 
         const user = await this.userRepository.findOne(id);
@@ -56,7 +55,7 @@ export class UserService {
         await this.userRepository.delete(id);
     }
 
-    async findById(id: string): Promise<UserDTO> {
+    async findById(id: string): Promise<User> {
         const user = await this.userRepository.findOne(id);
 
         if (!user) {

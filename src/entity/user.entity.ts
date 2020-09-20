@@ -22,5 +22,5 @@ export class User {
         type => Task,
         task => task.user,
     )
-    tasks: Task[];
+    tasks?: Task[];
 }
